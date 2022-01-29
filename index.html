@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bakery page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body ng-app="myapp" ng-controller="mycontrol">
+        <div>
+            <div class="maincontainer">
+                <h1>BAKERY ORDER </h1>
+                <div id="presentation">
+                    <label>1. Choose what to order</label>
+                    <div>
+                        <input class="form-control" type="text" 
+                        value="Total amount: {{price2 * amount2 + price1 * amount1 + 
+                            price3 * amount3 + price4 * amount4 | currency}}" aria-label="Disabled input example" disabled>
+                            
+                    
+                        <!-- <div><button type="button" ><i class="fa fa-shopping-cart"></i></button></div> -->
+                        
+                        <button type="button" class="btn btn-default btn-sm" ng-click="showcart()">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+                          </button>
+                    
+                    
+                    </div>
+                </div>
+                <div class="products">
+                    <a href="#" ng-click="showproductbread()">
+                                
+                                    <img src="img/cake1.jpg" >
+                                    <div class="details">
+                                        <h2 ng-init="name1='Sweet Cake'">{{name1}}</h2>
+                                        <p ng-init="price1='1'">{{price1 | currency}}</p>
+                                    </div>
+                                
+                    </a>
+                    <a href="#" ng-click="showproductchoco()">
+                                
+                                    <img src="img/cake2.jpg" >
+                                    <div class="details">
+                                        <h2 ng-init="name2='Chocolate Cake'">{{name2}}</h2>
+                                        <p ng-init="price2='3'">{{price2 | currency}}</p>
+                                    </div>
+                                
+                    </a>
+                    <a href="#" ng-click="showproductdonut()">
+                        
+                            <img src="img/cake3.jpg" >
+                            <div class="details">
+                                <h2 ng-init="name3='Donuts'">{{name3}}</h2>
+                                <p ng-init="price3='5'">{{price3 | currency}}</p>
+                            </div>
+                        
+                    </a>
+                    <a href="#" ng-click="showproductstrowberry()">
+                        
+                            <img src="img/cake4.jpg" >
+                            <div class="details">
+                                <h2 ng-init="name4='Strowberry'">{{name4}}</h2>
+                                <p ng-init="price4='10'">{{price4 | currency}}</p>
+                            </div>
+                        
+                    </a>
+                </div>
+                <form name="myForm" >
+                    <div class="subtotal" id="myconcerts">
+                    <p>{{price2 * amount2 + price1 * amount1 + 
+                        price3 * amount3 + price4 * amount4 | currency}}</p>
+                        <p>Taxes: 12%</p>
+                    </div>
+                    <p>{{(price2 * amount2 + price1 * amount1 + 
+                        price3 * amount3 + price4 * amount4)*1.12 | currency}} </p>
+                    <span ng-show="thanks">Thanks for choosing us, now fill the following form</span>
+                    <div class="form">
+                    <label>2. Full name</label>
+                    <span ng-show="myForm.myName.$touched && myForm.myName.$invalid
+                    || myForm.myLname.$touched && myForm.myLname.$invalid ">Full name is required</span>
+                    <input type="text"  placeholder="First Name" name="myName" ng-model="myName" required>
+
+                    <input type="text" placeholder="Last Name" name="myLname" ng-model="myLname" required>
+                    </div>
+                    <div class="form">
+                        <label>3. Email</label>
+                        <span ng-show="myForm.email.$touched && myForm.email.$invalid
+                        ">Email is required</span>
+                        <input type="email" placeholder="Email" name="email" ng-model="email" required>
+                    </div>
+                    <div class="form">
+            
+                        <label>4. Phone number</label>
+                        <span ng-show="myForm.myTel.$touched && myForm.myTel.$invalid
+                        ">Phone number is required</span>
+                        <input type="text" placeholder="Phone" name="myTel" ng-model="myTel" required>
+                    </div>
+                    <div class="form">
+                        <label>5. What is your address?</label>
+                        <span ng-show="myForm.address.$touched && myForm.address.$invalid
+                    || myForm.city.$touched && myForm.city.$invalid || myForm.state.$touched && myForm.state.$invalid
+                    || myForm.zip.$touched && myForm.zip.$invalid ">Please fill all mandatory fields</span>
+                        <input type="text" placeholder="Address" name="address" ng-model="address" required>
+                        <input type="text" placeholder="Address Line 2" >
+                        <input type="text" placeholder="City" name="city" ng-model="city" required>
+                        <input type="text" placeholder="State Address" name="state" ng-model="state" required>
+                        <input type="text" placeholder="Postal Code" name="zip" ng-model="zip" required>
+                        <select id="country">
+                            <option>Canada</option>
+                            <option>United States</option>
+                            <option>Mexico</option>
+                        </select>
+                    </div>
+                    <div id="button"><button type="submit"  class="btn btn-success">Submit</button></div>
+                    
+                </form>
+                
+            </div>
+            
+            <div  ng-show="showdetailsbread">
+                <div class="showdetails">
+                    <span class="close" ng-click="hidedetailsbread()">&times;</span>
+                    <div class="moredetails">
+                        <img src="img/cake1.jpg">
+                        <div class="details">
+                            <h2>{{name1}}</h2>
+                            <label>Amount</label>
+                            <input type="text" ng-model="amount1" placeholder="please select the amount" >
+                            <p>Price: {{price1 | currency}}</p>
+                            <button type="button" ng-click="addbasketbread();hidedetailsbread();sign()" class="btn btn-primary">Add to basket</button>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showdetailschoco">
+                <div class="showdetails">
+                    <span class="close" ng-click="hidedetailschoco()">&times;</span>
+                    <div class="moredetails">
+                        <img src="img/cake2.jpg">
+                        <div class="details">
+                            <h2>{{name2}}</h2>
+                            <label>Amount</label>
+                            <input type="text" placeholder="please select the amount" ng-model="amount2">
+                            <p>{{price2 | currency}}</p>
+                            <button type="button" ng-click="addbasketchoco();hidedetailschoco();sign()" class="btn btn-primary">Add to basket</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showdetailsdonut">
+                <div class="showdetails">
+                    <span class="close" ng-click="hidedetailsdonut()">&times;</span>
+                    <div class="moredetails">
+                        <img src="img/cake3.jpg">
+                        <div class="details">
+                            <h2>{{name3}}</h2>
+                            <label>Amount</label>
+                            <input type="text" placeholder="please select the amount" ng-model="amount3">
+                            <p>{{price3 | currency}}</p>
+                            <button type="button" ng-click="addbasketdonut();hidedetailsdonut();sign()" class="btn btn-primary">Add to basket</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showdetailsstrowberry">
+                <div class="showdetails">
+                    <span class="close" ng-click="hidedetailsstrowberry()">&times;</span>
+                    <div class="moredetails">
+                        <img src="img/cake4.jpg">
+                        <div class="details">
+                            <h2>{{name4}}</h2>
+                            <label>Amount</label>
+                            <input type="text" placeholder="please select the amount" ng-model="amount4">
+                            <p>{{price4 | currency}}</p>
+                            <button type="button" ng-click="addbasketstrowberry();hidedetailsstrowberry();sign()" class="btn btn-primary">Add to basket</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box" ng-show="showMe">
+                <span class="close" ng-click="hidecart()">&times;</span>
+                <table>
+                    <thead>
+                        <th>Product</th>
+                        <th>Preferences</th>
+                        <th>Unit Price</th>
+                        <th>Amount</th>
+                        <th>Total</th>    
+                    </thead>
+                    <tr ng-show="addproduct1">
+                        <td>{{name1}}</td>
+                        <td></td>
+                        <td>{{price1 | currency}}</td>
+                        <td>{{amount1}}</td>
+                        <td>{{price1 * amount1 | currency}}</td>
+                    </tr>
+                    <tr ng-show="addproduct2">
+                        <td>{{name2}}</td>
+                        <td></td>
+                        <td>{{price2 | currency}}</td>
+                        <td>{{amount2}}</td>
+                        <td>{{price2 * amount2 | currency}}</td> 
+                    </tr>
+                    <tr ng-show="addproduct3">
+                        <td>{{name3}}</td>
+                        <td></td>
+                        <td>{{price3 | currency}}</td>
+                        <td>{{amount3}}</td>
+                        <td>{{price3 * amount3 | currency}}</td> 
+                    </tr>
+                    <tr ng-show="addproduct4">
+                        <td>{{name4}}</td>
+                        <td></td>
+                        <td>{{price4 | currency}}</td>
+                        <td>{{amount4}}</td>
+                        <td>{{price4 * amount4 | currency}}</td> 
+                    </tr>
+                    <tr>
+                        <td>SubTotal</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td >{{price2 * amount2 + price1 * amount1 + 
+                            price3 * amount3 + price4 * amount4 | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Taxes</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>12%</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 20px; font-weight: bold;">Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td >{{(price2 * amount2 + price1 * amount1 + 
+                            price3 * amount3 + price4 * amount4)*1.12 | currency}}</td>
+                    </tr>                  
+                    
+                </table>
+                <div>
+                    
+                    <button type="button" ng-click="hidecart()" class="btn btn-warning">Continue Shopping</button>
+                    <!-- <a href="#myconcerts" ng-click="showthanks();hidecart()">Finish Shopping</a>
+                    <button type="button" ng-click="showthanks();hidecart()">Checkout</button> -->
+                    <a type="button"  href="#myconcerts" ng-click="showthanks();hidecart()" class="btn btn-success">Checkout</a>
+                </div>
+            </div>
+            <div class="signbox" ng-show="showthis">
+                <p>The product has been added</p>
+                <!-- <button type="button" ng-click="signhide()">Close</button> -->
+                <button type="button" ng-click="signhide()" class="btn btn-success">Close</button>
+            </div>
+                  
+        </div>
+        
+    
+    <script>
+        var app = angular.module("myapp", []);
+        app.controller("mycontrol", function($scope,$timeout){
+            /*$scope.products = [
+                {name1:"Bread", price1:"1", picture1:"img/bread.JPG"},
+                {name2:"Chocolate Chip Cookie", price2:"3", picture2:"img/chocolate_chip_cookie.JPG"},
+                {name3:"Donut", price3:"5", picture3:"img/donut.JPG"},
+                {name4:"Strowberry", price3:"10", picture3:"img/strowberry.JPG"},
+            ];
+            $scope.product = [];*/
+            
+            $scope.showMe = false;
+            $scope.showcart = function(){
+                $scope.showMe = true;
+            }
+            $scope.hidecart = function(){
+                $scope.showMe = false;
+            };
+            //show products
+            $scope.showdetailsbread = false;
+            $scope.showproductbread = function(){
+                $scope.showdetailsbread = true;
+            }
+            $scope.showdetailschoco = false;
+            $scope.showproductchoco = function(){
+                $scope.showdetailschoco = true;
+            };
+            $scope.showdetailsdonut = false;
+            $scope.showproductdonut = function(){
+                $scope.showdetailsdonut = true;
+            };
+            $scope.showdetailsstrowberry = false;
+            $scope.showproductstrowberry = function(){
+                $scope.showdetailsstrowberry = true;
+            };
+            //hide products
+            $scope.hidedetailsbread = function(){
+                $scope.showdetailsbread = false;
+            };
+            $scope.hidedetailschoco = function(){
+                $scope.showdetailschoco = false;
+            };
+            $scope.hidedetailsdonut = function(){
+                $scope.showdetailsdonut = false;
+            };
+            $scope.hidedetailsstrowberry = function(){
+                $scope.showdetailsstrowberry = false;
+            };
+            //add product to the cart
+            $scope.addproduct1 = false;
+            $scope.addproduct2 = false;
+            $scope.addproduct3 = false;
+            $scope.addproduct4 = false;
+            $scope.addbasketbread = function(){
+                if($scope.amount1 > 0){
+                    $scope.addproduct1 = true;
+                    $scope.showthis = true;
+                }else{
+                    alert("Amount cannot be 0");
+                    $scope.showthis = false;
+                };
+            };
+            $scope.addbasketchoco = function(){
+                if($scope.amount2 > 0){
+                    $scope.addproduct2 = true;
+                    $scope.showthis = true;
+                }else{
+                    alert("Amount cannot be 0");
+                    $scope.showthis = false;
+                };
+                
+            };
+            $scope.addbasketdonut = function(){
+                if($scope.amount3 > 0){
+                    $scope.addproduct3 = true;
+                    $scope.showthis = true;
+                }else{
+                    alert("Amount cannot be 0");
+                    $scope.showthis = false;
+                };
+                
+            };
+            $scope.addbasketstrowberry = function(){
+                if($scope.amount4 > 0){
+                    $scope.addproduct4 = true;
+                    $scope.showthis = true;
+                }else{
+                    alert("Amount cannot be 0");
+                    $scope.showthis = false;
+                };
+                
+            };
+            //put the initial amount
+            $scope.amount2 = 0;
+            $scope.amount1 = 0;
+            $scope.amount3 = 0;
+            $scope.amount4 = 0;
+            
+            $scope.showthis = false;
+            $scope.signhide = function(){
+                $scope.showthis = false;
+            };
+            $scope.showthanks = function(){
+                $scope.thanks = true;
+            };
+ 
+        });
+        
+    </script>
+        
+
+    </body>
+</html>
